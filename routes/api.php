@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\RegisterController;
+
 
 
 /*
@@ -21,4 +23,9 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::apiResource('posts', PostController::class)->only(['index', 'show', 'store']);
+
+Route::post('/register', [RegisterController::class, 'register']);
+
+
+
 
