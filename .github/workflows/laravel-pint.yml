@@ -24,6 +24,8 @@ jobs:
 
       - name: Push change back to repo
         run: |
+          git config --global user.email "ashrafulrasel14@gmail.com"
+          git config --global user.name "AshrafulRasel"
           git add .
           git commit -m "Laravel Pint"
           git push
