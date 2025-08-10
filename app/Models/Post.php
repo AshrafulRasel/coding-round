@@ -11,7 +11,7 @@ class Post extends Model
 
     protected $fillable = ['title', 'content'];
 
-    public $timestamps = false; 
+    public $timestamps = false;
 
     protected $dates = ['created_at'];
 }

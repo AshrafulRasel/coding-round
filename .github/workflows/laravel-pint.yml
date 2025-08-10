@@ -5,6 +5,9 @@ on:
     branches: 
       - main
 
+permissions:
+  contents: write
+
 jobs:
   laravel-pint:
     runs-on: ubuntu-latest
@@ -12,6 +15,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Setup PHP and composer
         uses: shivammathur/setup-php@v2
@@ -23,7 +28,15 @@ jobs:
         run: composer global require laravel/pint
 
       - name: Run Pint
-        run: pint --test
+        run: pint
 
-      - name: Push change back to repo
-        run: echo "To Do"
+      - name: Push changes back to repo
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m "Laravel Pint" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.head_ref }}
+
+   

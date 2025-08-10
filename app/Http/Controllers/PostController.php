@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-
 
 class PostController extends Controller
 {
@@ -16,6 +14,7 @@ class PostController extends Controller
     public function index(): JsonResponse
     {
         $posts = Post::all();
+
         return response()->json($posts);
     }
 
@@ -25,6 +24,7 @@ class PostController extends Controller
     public function store(StorePostRequest $request): JsonResponse
     {
         $post = Post::create($request->validated());
+
         return response()->json($post, 201);
     }
 
@@ -35,11 +35,10 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        if (!$post) {
+        if (! $post) {
             return response()->json(['message' => 'Post not found'], 404);
         }
 
         return response()->json($post);
     }
-
 }

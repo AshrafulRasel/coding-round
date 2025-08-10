@@ -1,13 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\TaskController;
-
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +28,3 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/tasks', [TaskController::class, 'store']);
 Route::patch('/tasks/{id}', [TaskController::class, 'update']);
 Route::get('/tasks/pending', [TaskController::class, 'pending']);
-
-
-
-
