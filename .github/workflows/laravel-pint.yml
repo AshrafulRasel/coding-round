@@ -20,7 +20,10 @@ jobs:
         run: composer global require laravel/pint
 
       - name: Run Pint
-        run: pint --test
+        run: pint 
 
       - name: Push change back to repo
-        run: echo "To Do"
+        run: |
+          git add .
+          git commit -m "Laravel Pint"
+          git push
