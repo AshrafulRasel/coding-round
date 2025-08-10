@@ -28,3 +28,4 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/tasks', [TaskController::class, 'store']);
 Route::patch('/tasks/{id}', [TaskController::class, 'update']);
 Route::get('/tasks/pending', [TaskController::class, 'pending']);
+

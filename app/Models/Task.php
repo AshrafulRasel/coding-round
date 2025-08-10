@@ -11,10 +11,7 @@ class Task extends Model
 
     protected $fillable = ['title', 'is_completed'];
 
-    public $timestamps = false; // since only created_at exists
-
     protected $casts = [
-        'is_completed' => 'boolean',
-        'created_at' => 'datetime',
+        'is_completed' => 'boolean'
     ];
 }
