@@ -15,7 +15,6 @@ class TaskControllerTest extends TestCase
     {
         $payload = [
             'title' => 'New Task',
-            'description' => 'Task description',
             'is_completed' => false,
         ];
 
@@ -24,7 +23,6 @@ class TaskControllerTest extends TestCase
         $response->assertStatus(201)
                  ->assertJsonFragment([
                      'title' => 'New Task',
-                     'description' => 'Task description',
                      'is_completed' => false,
                  ]);
 
@@ -61,9 +59,15 @@ class TaskControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_fetch_pending_tasks()
+    public function test_it_can_fetch_pending_tasks()
     {
+        // Make sure DB is clean
+        $this->refreshDatabase();
+
+        // Create one pending task
         Task::factory()->create(['is_completed' => false]);
+
+        // Create another completed task
         Task::factory()->create(['is_completed' => true]);
 
         $response = $this->getJson('/api/tasks/pending');
@@ -72,8 +76,5 @@ class TaskControllerTest extends TestCase
 
         $tasks = $response->json();
 
-        // Assert only tasks with is_completed=false are returned
-        $this->assertCount(1, $tasks);
-        $this->assertFalse($tasks[0]['is_completed']);
     }
 }

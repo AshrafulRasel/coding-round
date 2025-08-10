@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->boolean('is_completed')->default(false);
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 
