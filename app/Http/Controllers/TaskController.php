@@ -18,7 +18,7 @@ class TaskController extends Controller
         return response()->json($task, 201);
     }
 
-    // Mark task as completed or update is_completed
+    // Mark task as completed or update is_completed to do
     public function update(UpdateTaskRequest $request, $id): JsonResponse
     {
         $task = Task::find($id);
