@@ -1,12 +1,16 @@
 name: Test
 
-on: 
+on:
   pull_request
-
 
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+
+    env:
+      APP_ENV: testing
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ':memory:'
 
     steps:
       - name: Checkout Code
@@ -17,14 +21,18 @@ jobs:
         with:
           php-version: '8.2'
           tools: composer:v2
+          extensions: mbstring, bcmath, sqlite
 
       - name: Install Dependencies
         run: composer install -q --no-interaction
 
       - name: Prep Application
         run: |
-          cp .env.example .env
+          cp .env.testing .env
           php artisan key:generate
 
-      - name: Run Test
-        run: php artisan test --compact 
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      - name: Run tests
+        run: php artisan test --compact
