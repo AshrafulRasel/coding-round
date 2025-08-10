@@ -9,12 +9,9 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'is_completed'];
-
-    public $timestamps = false; // since only created_at exists
+    protected $fillable = ['title', 'description', 'is_completed'];
 
     protected $casts = [
-        'is_completed' => 'boolean',
-        'created_at' => 'datetime',
+        'is_completed' => 'boolean'
     ];
 }
