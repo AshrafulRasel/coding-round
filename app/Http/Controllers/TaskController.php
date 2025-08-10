@@ -11,8 +11,7 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     // Add a task
-    public function store(StoreTaskRequest $request): JsonResponse
-    {
+    public function store(StoreTaskRequest $request): JsonResponse{
         $data = $request->validated();
         $task = Task::create($data);
         return response()->json($task, 201);
