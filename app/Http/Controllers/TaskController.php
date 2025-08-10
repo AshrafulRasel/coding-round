@@ -6,7 +6,6 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
@@ -15,15 +14,16 @@ class TaskController extends Controller
     {
         $data = $request->validated();
         $task = Task::create($data);
+
         return response()->json($task, 201);
     }
 
-    // Mark task as completed or update is_completed
+    // Mark task as completed or update is_completed to do
     public function update(UpdateTaskRequest $request, $id): JsonResponse
     {
         $task = Task::find($id);
 
-        if (!$task) {
+        if (! $task) {
             return response()->json(['message' => 'Task not found'], 404);
         }
 
@@ -36,6 +36,7 @@ class TaskController extends Controller
     public function pending(): JsonResponse
     {
         $tasks = Task::where('is_completed', false)->get();
+
         return response()->json($tasks);
     }
 }
