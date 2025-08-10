@@ -10,7 +10,7 @@ class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    /** @test  update*/
     public function it_can_store_a_task()
     {
         $payload = [
