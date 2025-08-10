@@ -1,6 +1,9 @@
 name: introducing github action
 
-on: pull_request
+on: 
+  Push:
+    branches: 
+      - main
 
 jobs:
   laravel-pint:
