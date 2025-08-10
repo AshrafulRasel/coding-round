@@ -19,7 +19,7 @@ class TaskControllerTest extends TestCase
             'is_completed' => false,
         ];
 
-        $response = $this->postJson('/tasks', $payload);
+        $response = $this->postJson('/api/tasks', $payload);
 
         $response->assertStatus(201)
                  ->assertJsonFragment([
@@ -34,7 +34,7 @@ class TaskControllerTest extends TestCase
     /** @test */
     public function it_returns_404_when_updating_nonexistent_task()
     {
-        $response = $this->patchJson('/tasks/999', [
+        $response = $this->patchJson('/api/tasks/999', [
             'is_completed' => true,
         ]);
 
@@ -47,7 +47,7 @@ class TaskControllerTest extends TestCase
     {
         $task = Task::factory()->create(['is_completed' => false]);
 
-        $response = $this->patchJson("/tasks/{$task->id}", [
+        $response = $this->patchJson("/api/tasks/{$task->id}", [
             'is_completed' => true,
         ]);
 
@@ -66,7 +66,7 @@ class TaskControllerTest extends TestCase
         Task::factory()->create(['is_completed' => false]);
         Task::factory()->create(['is_completed' => true]);
 
-        $response = $this->getJson('/tasks/pending');
+        $response = $this->getJson('/api/tasks/pending');
 
         $response->assertStatus(200);
 
