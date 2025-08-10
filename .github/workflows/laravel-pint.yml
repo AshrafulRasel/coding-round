@@ -1,0 +1,26 @@
+name: introducing github action
+
+on: pull_request
+
+jobs:
+  laravel-pint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP and composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+
+      - name: Install Laravel Pint
+        run: composer global require laravel/pint
+
+      - name: Run Pint
+        run: pint --test
+
+      - name: Push change back to repo
+        run: echo "To Do"
